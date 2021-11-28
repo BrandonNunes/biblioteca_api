@@ -1,0 +1,9 @@
+{
+    "env":{
+        "MYSQL_USER":"root",
+       "MYSQL_PASSWORD":"br925511",
+        "MYSQL_DATA_BASE":"BDbiblioteca",
+        "MYSQL_HOST":"localhost",
+       "MYSQL_PORT":3306
+    }
+}
