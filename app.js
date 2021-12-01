@@ -4,6 +4,7 @@ const router = require('./router/router')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const routerUsuario = require('./router/usuarios')
+const routerLIvros = require('./router/livros')
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended:false}))
@@ -24,6 +25,7 @@ app.use((req,res,next)=>{
 
 app.use('/api',router)
 app.use('/api',routerUsuario)
+app.use('/api',routerLIvros)
 
 app.use((req,res,next)=>{
     const erro = new Error("Não encontrado");

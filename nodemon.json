@@ -4,6 +4,8 @@
        "MYSQL_PASSWORD":"br925511",
         "MYSQL_DATA_BASE":"BDbiblioteca",
         "MYSQL_HOST":"localhost",
-       "MYSQL_PORT":3306
+       "MYSQL_PORT":3306,
+
+       "JWT_KEY":"secret"
     }
 }

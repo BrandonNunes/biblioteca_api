@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const mysql = require('../mysql').pool
+const login = require('../middleware/login')
 
 router.get('/',(req,res)=>{
     res.status(200).send({
@@ -19,7 +20,7 @@ router.get('/alunos',(req,res)=>{
         )
     })
 })
-router.post('/add/alunos',(req,res)=>{
+router.post('/add/alunos',login,(req,res)=>{
    
     mysql.getConnection((error,conn)=>{
         if(error){return res.status(500).send({error:error})}
@@ -37,7 +38,7 @@ router.post('/add/alunos',(req,res)=>{
         )
     })
 })
-router.get('/alunos/:id',(req,res)=>{
+router.get('/alunos/:id',login,(req,res)=>{
     mysql.getConnection((error,conn)=>{
         conn.query(
             'SELECT * FROM alunos WHERE id = ?',
@@ -50,7 +51,7 @@ router.get('/alunos/:id',(req,res)=>{
         )
     })
 })
-router.put('/alunos/edit',(req,res)=>{
+router.put('/alunos/edit',login,(req,res)=>{
     mysql.getConnection((error,conn)=>{
         conn.query(
             'UPDATE alunos SET name = ?, turma = ?, pendente = ?, livros = ? WHERE id = ?',
@@ -65,7 +66,7 @@ router.put('/alunos/edit',(req,res)=>{
         )
     })
 })
-router.delete('/alunos/del',(req,res)=>{
+router.delete('/alunos/del', login, (req,res)=>{
     mysql.getConnection((error,conn)=>{
         conn.query(
             'DELETE FROM alunos WHERE id = ?',
