@@ -66,6 +66,7 @@ router.put('/alunos/edit',login,(req,res)=>{
         )
     })
 })
+
 router.delete('/alunos/del', login, (req,res)=>{
     mysql.getConnection((error,conn)=>{
         conn.query(

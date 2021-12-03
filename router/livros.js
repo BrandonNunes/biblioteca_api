@@ -21,8 +21,8 @@ router.post('/add/livro',(req,res) => {
     mysql.getConnection((erro, conn) => {
         if (erro){return res.status(500).send({error:erro})}
         conn.query(
-            'INSERT INTO livros (titulo,nome_autor,exemplares,qtd_disponivel,genero) VALUES (?,?,?,?,?)',
-            [req.body.titulo,req.body.nome_autor,req.body.exemplares,req.body.qtd_disponivel,req.body.genero],
+            'INSERT INTO livros (titulo,nome_autor,exemplares,qtd_disponivel,genero,estante,prateleira) VALUES (?,?,?,?,?,?,?)',
+            [req.body.titulo,req.body.nome_autor,req.body.exemplares,req.body.qtd_disponivel,req.body.genero,req.body.estante,req.body.prateleira],
             (erro,result) => {
                 conn.release();
                 if(erro){return res.status(500).send({error:erro})}
@@ -42,7 +42,8 @@ router.put('/livro/edit', (req, res) => {
         conn.query(
             'UPDATE livros SET titulo = ?, nome_autor = ?, exemplares = ?, qtd_disponivel = ?, genero = ? WHERE id_livros = ?',
             [req.body.titulo, req.body.nome_autor, req.body.exemplares, req.body.qtd_disponivel, req.body.genero, req.body.id_livros],
-            (erro,result)=>{
+            (erro,result)=>{    
+                console.log(req.body.titulo, req.body.nome_autor, req.body.exemplares, req.body.qtd_disponivel, req.body.genero, req.body.id_livros)          
                 conn.release();
                 if(erro){return res.status(500).send({error:erro})}
                 res.status(202).send({
@@ -83,6 +84,7 @@ router.get('/livro/:id',(req,res)=>{
         )
     })
 })
+
 
 
 module.exports = router
